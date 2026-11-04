@@ -41,14 +41,12 @@ body{background:radial-gradient(ellipse 70% 50% at 75% -5%,rgba(0,170,231,.25),t
 button,input{font:inherit}
 button:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid var(--cyan);outline-offset:3px}
 a{color:var(--sky)}
-.app{flex:1;display:flex;flex-direction:column;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:calc(env(safe-area-inset-top,0px) + 28px) 10px}
+.app{flex:1;display:flex;flex-direction:column;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:14px 10px}
 .wrapw{max-width:1300px;width:100%;margin:0 auto}
 
 /* header */
 .top{display:flex;align-items:center;justify-content:space-between;gap:12px 18px;flex-wrap:wrap}
-.brand{display:flex;align-items:center;gap:12px;color:inherit;text-decoration:none;border-radius:14px;cursor:pointer;transition:opacity .15s}
-.brand:hover{opacity:.85}
-.brand:active{transform:scale(.98)}
+.brand{display:flex;align-items:center;gap:12px}
 .logo{width:50px;height:50px;border-radius:12px;background:#fff;display:grid;place-items:center;flex:none;padding:5px}
 .logo img{width:100%;height:100%;display:block}
 .eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:600;margin:0}
@@ -63,8 +61,12 @@ a{color:var(--sky)}
 .icon-btn{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--fg);display:grid;place-items:center;cursor:pointer}
 .icon-btn:hover{border-color:var(--cyan)}
 .icon-btn svg{width:20px;height:20px}
+.lang{position:relative;z-index:55;display:inline-flex;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:3px;gap:2px}
+.lang button{border:0;background:transparent;color:var(--muted);padding:9px 14px;border-radius:999px;font-weight:700;cursor:pointer;font-size:14px;white-space:nowrap}
+.lang button:hover{color:var(--fg)}
+.lang button[aria-pressed="true"]{background:var(--cyan);color:var(--ink)}
 
-.views{flex:1;display:flex;flex-direction:column;padding-block:26px 8px}
+.views{flex:1;display:flex;flex-direction:column;padding-block:18px 8px}
 .view{flex:1;display:flex;flex-direction:column;gap:18px}
 h1.h{font-family:var(--display);font-weight:800;font-size:clamp(34px,5.2vw,72px);line-height:.98;margin:0;letter-spacing:-.03em;text-wrap:balance}
 h1.h span{color:var(--cyan)}
@@ -266,15 +268,16 @@ details summary{cursor:pointer;color:var(--sky);font-weight:600}
 <body>
 <div class="app">
   <header class="top wrapw">
-    <a class="brand" href="#" id="brand-link" aria-label="Diplomat Challenge: back to the game" title="Back to the game">
+    <div class="brand">
       <div class="logo"><img src="data:image/png;base64,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" alt="Shaggar logo"></div>
       <div>
-        <p class="eyebrow">Shaggar City · COP32 readiness</p>
-        <p class="brand-name">Diplomat <span>Challenge</span></p>
+        <p class="eyebrow" data-i18n="eyebrow">Shaggar City · COP32 readiness</p>
+        <p class="brand-name" data-i18n-html="brand">Diplomat <span>Challenge</span></p>
       </div>
-    </a>
+    </div>
     <div class="top-right">
-      <div class="who" id="who" hidden><b id="who-name"></b><button class="link-btn" id="change-name">Change name</button></div>
+      <div class="who" id="who" hidden><b id="who-name"></b><button class="link-btn" id="change-name" data-i18n="changeName">Change name</button></div>
+      <div class="lang" id="lang" role="group" aria-label="Language / Afaan"><button data-lang="om" lang="om">Afaan Oromoo</button><button data-lang="en" lang="en">English</button></div>
       <div class="tools">
         <button class="icon-btn" id="sound" aria-label="Mute sound" title="Sound on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path id="wave" d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg></button>
         <button class="icon-btn" id="full" aria-label="Full screen" title="Full screen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
@@ -286,14 +289,14 @@ details summary{cursor:pointer;color:var(--sky);font-weight:600}
     <!-- 1. Pick a name -->
     <section class="view" id="v-pick" hidden>
       <div class="pick-head">
-        <h1 class="h">Who's <span>playing?</span></h1>
+        <h1 class="h" data-i18n-html="pickTitle">Who's <span>playing?</span></h1>
         <p class="lede" id="pick-lede">Find your name to start. Your score is saved under your name.</p>
       </div>
-      <label class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="search" type="search" placeholder="Type your name" autocomplete="off" aria-label="Search your name"></label>
+      <label class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="search" type="search" placeholder="Type your name" autocomplete="off" aria-label="Search your name" data-i18n-ph="searchPh"></label>
       <div class="names" id="names"></div>
       <div class="guest-row">
-        <input id="guest-name" maxlength="40" placeholder="Not on the list? Type your name" aria-label="Guest name">
-        <button class="ghost" id="guest-go">Play as guest</button>
+        <input id="guest-name" maxlength="40" placeholder="Not on the list? Type your name" aria-label="Guest name" data-i18n-ph="guestPh">
+        <button class="ghost" id="guest-go" data-i18n="guestGo">Play as guest</button>
       </div>
     </section>
 
@@ -302,7 +305,7 @@ details summary{cursor:pointer;color:var(--sky);font-weight:600}
       <div class="home">
         <div style="display:flex;flex-direction:column;gap:16px">
           <h1 class="h" id="hello"></h1>
-          <p class="lede">Three rounds on protocol, conduct and hospitality for COP32. The host opens one round at a time, and you play each round once.</p>
+          <p class="lede" data-i18n="homeLede">Three rounds on protocol, conduct and hospitality for COP32. The host opens one round at a time, and you play each round once.</p>
           <div class="my-scores" id="my-scores"></div>
         </div>
         <article class="round-card" id="round-card"></article>
@@ -311,31 +314,31 @@ details summary{cursor:pointer;color:var(--sky);font-weight:600}
 
     <!-- 3a. Round 1: Lucky Bowl -->
     <section class="view" id="v-bowl" hidden>
-      <div class="game-head"><h2>Round 1 · Lucky Bowl</h2><div class="prog"><span>Ball <b id="bowl-n">0</b> of <b id="bowl-of">10</b></span><span>Right <b id="bowl-right">0</b></span></div></div>
+      <div class="game-head"><h2 id="h-bowl">Round 1 · Lucky Bowl</h2><div class="prog"><span><span data-i18n="ball">Ball</span> <b id="bowl-n">0</b> / <b id="bowl-of">10</b></span><span><span data-i18n="right">Right</span> <b id="bowl-right">0</b></span></div></div>
       <div class="bowl-stage">
         <div class="bowl-wrap" id="bowl-wrap"><canvas id="bowl" aria-label="Glass bowl of numbered balls"></canvas></div>
-        <button class="btn" id="draw">Draw a ball</button>
+        <button class="btn" id="draw" data-i18n="draw">Draw a ball</button>
         <p class="hint" id="bowl-hint">Tap Draw to mix the bowl</p>
       </div>
     </section>
 
     <!-- 3b. Round 2: Stamp It -->
     <section class="view" id="v-stamp" hidden>
-      <div class="game-head"><h2>Round 2 · Stamp It</h2><div class="prog"><span>Brief <b id="st-n">0</b> of <b id="st-of">12</b></span><span>Right <b id="st-right">0</b></span></div></div>
+      <div class="game-head"><h2 id="h-stamp">Round 2 · Stamp It</h2><div class="prog"><span><span data-i18n="brief">Brief</span> <b id="st-n">0</b> / <b id="st-of">12</b></span><span><span data-i18n="right">Right</span> <b id="st-right">0</b></span></div></div>
       <div class="stamp-stage">
         <article class="doc">
-          <div class="doc-head"><span id="doc-ref">Official brief</span><span>Time left <span class="secs" id="doc-secs">21</span> s</span></div>
+          <div class="doc-head"><span id="doc-ref">Official brief</span><span><span data-i18n="timeLeft">Time left</span> <span class="secs" id="doc-secs">21</span> s</span></div>
           <div class="doc-start" id="doc-start">
-            <p class="doc-q">Rapid fire: yes or no</p>
-            <p class="why" style="color:var(--ink-muted)">Read each brief and stamp YES or NO within 21 seconds. When the bar runs out, the brief is marked wrong.</p>
-            <button class="btn" id="doc-go">Start</button>
+            <p class="doc-q" data-i18n="stampIntro">Rapid fire: yes or no</p>
+            <p class="why" style="color:var(--ink-muted)" data-i18n="stampRules">Read each brief and stamp YES or NO within 21 seconds. When the bar runs out, the brief is marked wrong.</p>
+            <button class="btn" id="doc-go" data-i18n="start">Start</button>
           </div>
           <div id="doc-play" hidden style="display:flex;flex-direction:column;gap:20px">
             <div class="timer" id="doc-timer"><i id="doc-bar"></i></div>
             <p class="doc-q" id="doc-q"></p>
-            <div class="yn"><button class="yes" id="doc-yes">Yes</button><button class="no" id="doc-no">No</button></div>
+            <div class="yn"><button class="yes" id="doc-yes" data-i18n="yes">Yes</button><button class="no" id="doc-no" data-i18n="no">No</button></div>
             <div class="result" id="doc-result" hidden>
-              <div class="result-text"><p class="verdict" id="doc-verdict"></p><span class="why-label">Why</span><p class="why" id="doc-why"></p></div>
+              <div class="result-text"><p class="verdict" id="doc-verdict"></p><span class="why-label" data-i18n="why">Why</span><p class="why" id="doc-why"></p></div>
               <button class="btn" id="doc-next">Next brief</button>
             </div>
           </div>
@@ -346,7 +349,7 @@ details summary{cursor:pointer;color:var(--sky);font-weight:600}
 
     <!-- 3c. Round 3: Road to COP32 -->
     <section class="view" id="v-road" hidden>
-      <div class="game-head"><h2>Round 3 · Road to COP32</h2><div class="prog"><span>Stop <b id="rd-n">0</b> of <b id="rd-of">11</b></span><span>Right <b id="rd-right">0</b></span></div></div>
+      <div class="game-head"><h2 id="h-road">Round 3 · Road to COP32</h2><div class="prog"><span><span data-i18n="stop">Stop</span> <b id="rd-n">0</b> / <b id="rd-of">11</b></span><span><span data-i18n="right">Right</span> <b id="rd-right">0</b></span></div></div>
       <div class="road-board" id="road-board"><div class="track" id="track"></div></div>
       <div class="road-actions">
         <p class="next-stop" id="next-stop"></p>
@@ -363,7 +366,7 @@ details summary{cursor:pointer;color:var(--sky);font-weight:600}
           <h1 class="h" id="done-title" style="font-size:clamp(28px,3.6vw,48px)"></h1>
         </div>
         <div style="display:flex;flex-direction:column;gap:18px">
-          <p class="label">Your answers</p>
+          <p class="label" data-i18n="yourAnswers">Your answers</p>
           <div class="review" id="done-review"></div>
           <div class="done-actions"><button class="btn" id="done-next"></button><span class="sync" id="sync"></span></div>
         </div>
@@ -378,7 +381,6 @@ details summary{cursor:pointer;color:var(--sky);font-weight:600}
         <input id="pw" type="password" autocomplete="current-password" placeholder="Password" aria-label="Admin password">
         <p class="err" id="pw-err"></p>
         <button class="btn" type="submit">Open dashboard</button>
-        <p style="margin:14px 0 0;text-align:center"><a href="#" class="to-game">Back to the game</a></p>
       </form>
     </section>
     <section class="view" id="v-admin" hidden>
@@ -395,12 +397,12 @@ details summary{cursor:pointer;color:var(--sky);font-weight:600}
         <div class="panel"><h2>Live feed</h2><ul class="feed" id="feed"></ul></div>
         <div class="panel wide"><h2>Questions</h2><div class="tbl-wrap"><table id="t-qs"></table></div></div>
       </div>
-      <div><button class="ghost" id="adm-refresh">Refresh now</button> <button class="ghost" id="adm-out">Sign out</button> <button class="ghost to-game" id="adm-game">Open the game</button></div>
+      <div><button class="ghost" id="adm-refresh">Refresh now</button> <button class="ghost" id="adm-out">Sign out</button></div>
     </section>
   </main>
 </div>
 <div class="band" aria-hidden="true"></div>
-<div class="foot"><span>Shaggar City Administration · Powered by Shaggar BPO</span><a href="#admin" id="admin-link">Admin</a></div>
+<div class="foot"><span data-i18n="footer">Shaggar City Administration · Powered by Shaggar BPO</span><a href="#admin" id="admin-link">Admin</a></div>
 
 <div class="overlay" id="overlay" hidden role="dialog" aria-modal="true" aria-labelledby="q">
   <div class="card" id="card">
@@ -411,7 +413,7 @@ details summary{cursor:pointer;color:var(--sky);font-weight:600}
     <h2 class="q" id="q"></h2>
     <div class="options" id="options"></div>
     <div class="result" id="result" hidden>
-      <div class="result-text"><p class="verdict" id="verdict"></p><span class="why-label">Why</span><p class="why" id="why"></p></div>
+      <div class="result-text"><p class="verdict" id="verdict"></p><span class="why-label" data-i18n="why">Why</span><p class="why" id="why"></p></div>
       <button class="btn" id="next">Continue</button>
     </div>
   </div>
@@ -426,12 +428,13 @@ details summary{cursor:pointer;color:var(--sky);font-weight:600}
    2. Big screen: open this page with #screen at the end of the address.
       Admin: open it with #admin at the end.
    ========================================================= */
-const API_URL = "https://script.google.com/macros/s/AKfycbwLAt7P6cg57ZGhIqBsRT00gAwzMskg8q-ybwBdEU9elHxO7xe9z_VESb0xw7K2Vm4BhA/exec";
+const API_URL = "";
 const PREVIEW_ADMIN_PASSWORD = "shaggar"; // only used in preview mode; the real password lives in the Google Apps Script
 const STAMP_SECONDS = 21;
+const DEFAULT_LANG = "om";  // language a new phone starts in: "om" = Afaan Oromoo, "en" = English
 
 /* ===================== GUEST LIST ===================== */
-const GUESTS = [["abebe-mulu", "Abebe Mulu", "Trainer"], ["milkesa-takele", "Milkesa Takele", "Host"], ["lelise-dhuga", "Lelise Dhuga", "Deputy Head of Oromia president office and Head of cooperation at Oromia presidant office"], ["tashome-adugna-phd", "Tashome Adugna (PhD)", "Deputy President of Oromia Regional State; Mayor of Shaggar City"], ["mr-alemayew-tulu", "Mr. Alemayew Tulu", "Head of Shaggar City Prosperity Party"], ["mr-motuma-tamesgen", "Mr. Motuma Tamesgen", "Deputy Mayor and Head of the Economic Cluster of Shaggar City"], ["mr-merid-demiru", "Mr. Merid Demiru", "Deputy Mayor of Shaggar City"], ["mr-mohamed-guye", "Mr. Mohamed Guye", "Deputy Mayor"], ["mr-alemu-adola", "Mr. Alemu Adola", "Head of Shaggar City Political Affairs"], ["mr-mamo-agama", "Mr. Mamo Agama", "Head of Shaggar City Political Organization Affairs"], ["h-e-kabeto-albe", "H.E Kabeto Albe", "Speaker of Shaggar City Council"], ["mr-agegnew-fekiru", "Mr. Agegnew Fekiru", "Head of Shaggar City Mayor's Office"], ["mr-daraje-magarsa", "Mr. Daraje Magarsa", "Head of Shaggar City Municipal Office"], ["mr-ahmed-tofiq", "Mr. Ahmed Tofiq", "Head of Shaggar City Planning Office"], ["mr-firakiya-kasahun", "Mr. Firakiya Kasahun", "Head of Shaggar City Education Office"], ["mr-abera-botore", "Mr. Abera Botore", "Head of Shaggar City Health Office"], ["eng-aboma-taresa", "Eng. Aboma Taresa", "Deputy Head of Shaggar City Municipal Office"], ["mr-desta-wariyo", "Mr. Desta Wariyo", "Deputy Head of Shaggar City Municipal Office"], ["mr-nasir-husen", "Mr. Nasir Husen", "Deputy Head of Shaggar City Mayor's Office"], ["mr-melkamu-ambawu", "Mr. Melkamu Ambawu", "Head of Shaggar City Revenue Office"], ["eng-zelalem-boja", "Eng. Zelalem Boja", "Head of Shaggar City Roads and Transport Office"], ["ms-lidiya-chali", "Ms. Lidiya Chali", "Head of Shaggar City Organizational Affairs Office"], ["mr-tesfaye-asefa", "Mr. Tesfaye Asefa", "Deputy Head of Shaggar City Peace Office"], ["mr-dhufera-damu", "Mr. Dhufera Damu", "Head of Shaggar City Land Office"], ["mr-abera-chala", "Mr. Abera Chala", "Head of Shaggar City Agriculture Office"], ["ms-werkinash-midheksa", "Ms. Werkinash Midheksa", "Head of Shaggar City Buusa Gonofaa Office"], ["ms-sena-ketema", "Ms. Sena Ketema", "Head of Shaggar City Innovation and Technology Office"], ["eng-gelma-gamaro", "Eng. Gelma Gamaro", "Head of Shaggar City Construction Authority"], ["ms-roza-mohamad", "Ms. Roza Mohamad", "Deputy Head of Shaggar City Enterprise and Industry Office"], ["a-commissioner-teshala-obse", "A/Commissioner Teshala Obse", "Head of Shaggar City Peace Office"], ["ms-tsehay-debele", "Ms. Tsehay Debele", "Deputy Head of Shaggar City Trade and Investment Office"], ["mr-adana-kebeda", "Mr. Adana Kebeda", "Deputy Head of Shaggar City Inspection Authority"], ["mr-misgana-dheresa", "Mr. Misgana Dheresa", "Deputy Head of Shaggar City Health Office"], ["mr-tesfaye-yadeta", "Mr. Tesfaye Yadeta", "Deputy Head of Shaggar City Planning and Finance Office"], ["mr-nebiyu-raga", "Mr. Nebiyu Raga", "Deputy Head of Shaggar City Trade and Investment Office"], ["mr-tusa-dhekama", "Mr. Tusa Dhekama", "Deputy Head of Shaggar City Construction Authority"], ["dr-zerihun-takela", "Dr. Zerihun Takela", "Deputy Head of Shaggar City Education Office"], ["mr-gosa-desaleny", "Mr. Gosa Desaleny", "Deputy Head of Shaggar City Land Office"], ["mr-abdisa-gedafa", "Mr. Abdisa Gedafa", "Deputy Head of Shaggar City Revenue Office"], ["mr-teka-werqina", "Mr. Teka Werqina", "Head of Shaggar City Planning and Finance Office"], ["ms-boge-kene", "Ms. Boge Kene", "Head of Shaggar City Inspection Authority"], ["ms-bontu-wakgari", "Ms Bontu Wakgari", "Head of Shaggar City Tourism Office"], ["mr-kasim-hanse", "Mr Kasim Hanse", "Head of Shaggar City Enterprise and Industry Office"], ["mr-ermiyas-denaka", "Mr Ermiyas Denaka", "Head of Shaggar City Trade and Investment Office"], ["mr-temam-husen", "Mr Temam Husen", "Deputy Head of Shaggar City Inspection Authority"], ["mr-kifle-celkaba", "Mr Kifle Celkaba", "Deputy Head of Shaggar City Roads and Transport Office"], ["mr-girma-urge", "Mr Girma Urge", "Shaggar City Health Office Adviser"], ["mr-diso-kushu", "Mr Diso Kushu", "Shaggar City Municipal Office Adviser"], ["mr-limat-asefa", "Mr Limat Asefa", "Shaggar City Municipal Office Adviser"], ["mr-marsiimoy-regasa", "Mr Marsiimoy Regasa", "Shaggar City Mayor's Office Adviser"], ["ms-adanu-abdisa", "Ms Adanu Abdisa", "Shaggar City Public Organization Affairs Adviser"], ["mr-bilisuma-dire", "Mr Bilisuma Dire", "Shaggar City Public Organization Affairs Adviser"], ["halake-waqi-phd", "Halake Waqi (PHD)", "Adviser to Shaggar City Mayor"], ["abebe-kebede-jaleta-phd", "Abebe Kebede Jaleta (PHD)", "CEO of shaggar investment Group"], ["eng-hunduma-bekele-kinati", "Eng,Hunduma Bekele kinati", "CEO of shaggar city realstate and construction"], ["mr-yasin-ahmed-mohamed", "Mr Yasin Ahmed Mohamed", "CEO of shaggar city Transport and Logistics"], ["mr-degaga-bekele-bayu", "Mr Degaga Bekele bayu", "CEO of shaggar city Mining Enterprise"], ["mr-mekonen-hambe", "Mr Mekonen Hambe", "General Director of the first service center"], ["hiwot-asefa", "Hiwot Asefa", "Deputy General Director and ICT Head of First Service Center"], ["kasahun-jobir", "Kasahun Jobir", "Deputy General Director and service Head of First Service Center"], ["hingabu-hordofa-phd", "Hingabu Hordofa (PHD)", "CEO of shaggar city Agricultural Enterprise"], ["dr-hikma-etafa", "Dr. Hikma Etafa", "Facilitator"], ["meron-admasu", "Meron Admasu", "Facilitator"], ["kalab-solomon", "Kalab Solomon", "Facilitator"], ["robenus-belete", "Robenus Belete", "Facilitator"], ["daniel-gelan", "Daniel Gelan", "Facilitator"], ["tsegalem-hailu", "Tsegalem Hailu", "Facilitator"], ["mustefa-bekele", "Mustefa Bekele", "Facilitator"], ["marta-nemera", "Marta Nemera", "Facilitator"], ["ruth-takele", "Ruth Takele", "Facilitator"], ["abanezzer-bayu", "Abanezzer Bayu", "Facilitator"], ["natan-birhanu", "Natan Birhanu", "Facilitator"], ["dawit-kasahun", "Dawit Kasahun", "Facilitator"]].map(([id,name,title])=>({id,name,title}));
+const GUESTS = [["abebe-mulu", "Abebe Mulu", "Trainer"], ["milkesa-takele", "Milkesa Takele", "Host"], ["lelise-dhuga", "Lelise Dhuga", "Deputy Head of Oromia president office and Head of cooperation at Oromia presidant office"], ["tashome-adugna-phd", "Tashome Adugna (PhD)", "Deputy President of Oromia Regional State; Mayor of Shaggar City"], ["mr-alemayew-tulu", "Mr. Alemayew Tulu", "Head of Shaggar City Prosperity Party"], ["mr-motuma-tamesgen", "Mr. Motuma Tamesgen", "Deputy Mayor and Head of the Economic Cluster of Shaggar City"], ["mr-merid-demiru", "Mr. Merid Demiru", "Deputy Mayor of Shaggar City"], ["mr-mohamed-guye", "Mr. Mohamed Guye", "Deputy Mayor"], ["mr-alemu-adola", "Mr. Alemu Adola", "Head of Shaggar City Political Affairs"], ["mr-mamo-agama", "Mr. Mamo Agama", "Head of Shaggar City Political Organization Affairs"], ["h-e-kabeto-albe", "H.E Kabeto Albe", "Speaker of Shaggar City Council"], ["mr-agegnew-fekiru", "Mr. Agegnew Fekiru", "Head of Shaggar City Mayor's Office"], ["mr-daraje-magarsa", "Mr. Daraje Magarsa", "Head of Shaggar City Municipal Office"], ["mr-ahmed-tofiq", "Mr. Ahmed Tofiq", "Head of Shaggar City Planning Office"], ["mr-firakiya-kasahun", "Mr. Firakiya Kasahun", "Head of Shaggar City Education Office"], ["mr-abera-botore", "Mr. Abera Botore", "Head of Shaggar City Health Office"], ["eng-aboma-taresa", "Eng. Aboma Taresa", "Deputy Head of Shaggar City Municipal Office"], ["mr-desta-wariyo", "Mr. Desta Wariyo", "Deputy Head of Shaggar City Municipal Office"], ["mr-nasir-husen", "Mr. Nasir Husen", "Deputy Head of Shaggar City Mayor's Office"], ["mr-melkamu-ambawu", "Mr. Melkamu Ambawu", "Head of Shaggar City Revenue Office"], ["eng-zelalem-boja", "Eng. Zelalem Boja", "Head of Shaggar City Roads and Transport Office"], ["ms-lidiya-chali", "Ms. Lidiya Chali", "Head of Shaggar City Organizational Affairs Office"], ["mr-tesfaye-asefa", "Mr. Tesfaye Asefa", "Deputy Head of Shaggar City Peace Office"], ["mr-dhufera-damu", "Mr. Dhufera Damu", "Head of Shaggar City Land Office"], ["mr-abera-chala", "Mr. Abera Chala", "Head of Shaggar City Agriculture Office"], ["ms-werkinash-midheksa", "Ms. Werkinash Midheksa", "Head of Shaggar City Buusa Gonofaa Office"], ["ms-sena-ketema", "Ms. Sena Ketema", "Head of Shaggar City Innovation and Technology Office"], ["eng-gelma-gamaro", "Eng. Gelma Gamaro", "Head of Shaggar City Construction Authority"], ["ms-roza-mohamad", "Ms. Roza Mohamad", "Deputy Head of Shaggar City Enterprise and Industry Office"], ["a-commissioner-teshala-obse", "A/Commissioner Teshala Obse", "Head of Shaggar City Peace Office"], ["ms-tsehay-debele", "Ms. Tsehay Debele", "Deputy Head of Shaggar City Trade and Investment Office"], ["mr-adana-kebeda", "Mr. Adana Kebeda", "Deputy Head of Shaggar City Inspection Authority"], ["mr-misgana-dheresa", "Mr. Misgana Dheresa", "Deputy Head of Shaggar City Health Office"], ["mr-tesfaye-yadeta", "Mr. Tesfaye Yadeta", "Deputy Head of Shaggar City Planning and Finance Office"], ["mr-nebiyu-raga", "Mr. Nebiyu Raga", "Deputy Head of Shaggar City Trade and Investment Office"], ["mr-tusa-dhekama", "Mr. Tusa Dhekama", "Deputy Head of Shaggar City Construction Authority"], ["dr-zerihun-takela", "Dr. Zerihun Takela", "Deputy Head of Shaggar City Education Office"], ["mr-gosa-desaleny", "Mr. Gosa Desaleny", "Deputy Head of Shaggar City Land Office"], ["mr-abdisa-gedafa", "Mr. Abdisa Gedafa", "Deputy Head of Shaggar City Revenue Office"], ["mr-teka-werqina", "Mr. Teka Werqina", "Head of Shaggar City Planning and Finance Office"], ["ms-boge-kene", "Ms. Boge Kene", "Head of Shaggar City Inspection Authority"], ["ms-bontu-wakgari", "Ms Bontu Wakgari", "Head of Shaggar City Tourism Office"], ["mr-kasim-hanse", "Mr Kasim Hanse", "Head of Shaggar City Enterprise and Industry Office"], ["mr-ermiyas-denaka", "Mr Ermiyas Denaka", "Head of Shaggar City Trade and Investment Office"], ["mr-temam-husen", "Mr Temam Husen", "Deputy Head of Shaggar City Inspection Authority"], ["mr-kifle-celkaba", "Mr Kifle Celkaba", "Deputy Head of Shaggar City Roads and Transport Office"], ["mr-girma-urge", "Mr Girma Urge", "Shaggar City Health Office Adviser"], ["mr-diso-kushu", "Mr Diso Kushu", "Shaggar City Municipal Office Adviser"], ["mr-limat-asefa", "Mr Limat Asefa", "Shaggar City Municipal Office Adviser"], ["mr-marsiimoy-regasa", "Mr Marsiimoy Regasa", "Shaggar City Mayor's Office Adviser"], ["ms-adanu-abdisa", "Ms Adanu Abdisa", "Shaggar City Public Organization Affairs Adviser"], ["mr-bilisuma-dire", "Mr Bilisuma Dire", "Shaggar City Public Organization Affairs Adviser"], ["halake-waqi-phd", "Halake Waqi (PHD)", "Adviser to Shaggar City Mayor"], ["abebe-kebede-jaleta-phd", "Abebe Kebede Jaleta (PHD)", "CEO of shaggar investment Group"], ["eng-hunduma-bekele-kinati", "Eng,Hunduma Bekele kinati", "CEO of shaggar city realstate and construction"], ["mr-yasin-ahmed-mohamed", "Mr Yasin Ahmed Mohamed", "CEO of shaggar city Transport and Logistics"], ["mr-degaga-bekele-bayu", "Mr Degaga Bekele bayu", "CEO of shaggar city Mining Enterprise"], ["mr-mekonen-hambe", "Mr Mekonen Hambe", "General Director of the first service center"], ["hiwot-asefa", "Hiwot Asefa", "Deputy General Director and ICT Head of First Service Center"], ["kasahun-jobir", "Kasahun Jobir", "Deputy General Director and service Head of First Service Center"], ["hingabu-hordofa-phd", "Hingabu Hordofa (PHD)", "CEO of shaggar city Agricultural Enterprise"], ["dr-hikma-etafa", "Dr. Hikma Etafa", "Facilitator"], ["meron-admasu", "Meron Admasu", "Facilitator"], ["kaleab-solomon", "Kaleab Solomon", "Facilitator"], ["robenus-belete", "Robenus Belete", "Facilitator"], ["daniel-gelan", "Daniel Gelan", "Facilitator"], ["tsegalem-hailu", "Tsegalem Hailu", "Facilitator"], ["mustefa-bekele", "Mustefa Bekele", "Facilitator"], ["marta-nemera", "Marta Nemera", "Facilitator"], ["ruth-takele", "Ruth Takele", "Facilitator"], ["abanezzer-bayu", "Abanezzer Bayu", "Facilitator"], ["natan-birhanu", "Natan Birhanu", "Facilitator"], ["dawit-kasahun", "Dawit Kasahun", "Facilitator"]].map(([id,name,title])=>({id,name,title}));
 
 /* ===================== QUESTIONS ===================== */
 const RAW = [
@@ -469,15 +472,84 @@ const RAW = [
  [3,'yn',"Is it wise to promise guests experiences the city cannot yet deliver, to look impressive?",null,'No',"Overpromising damages credibility. Show real strengths, be honest about what is still in progress, and follow through."],
  [3,'yn',"Does a leader's own behaviour toward guests and staff shape the culture of hospitality in the whole city?",null,'Yes',"Leaders set the tone through their own behaviour, standards and willingness to listen to front-line feedback."]
 ];
+/* Afaan Oromoo version of the same 33 questions, in the same order: [question, options (multiple choice only), explanation] */
+const OM = [["Marii idil-addunyaa COP32 kan dhimma jijjiirama qilleensaa irratti gaggeeffamu irratti eenyutu Itoophiyaa bakka bu’ee haasa’a?", ["Kantiibaa yookaan hogganaa magaalaa kamiyyuu kan bakka sanatti argame", "Garee marii biyyaalessaa, itti waamamaa, ajajaa fi aangoo Mootummaa Federaalaatiin hojjetu", "Hogganaa hoteelaa yookaan hogganaa galma walgahiin itti gaggeeffamu", "Nama miidiyaa hawaasaa irratti jalqaba odeeffannoo sana maxxanse kamiyyuu"], "Ejjennoowwan marii biyyaalessaa irratti hundaa’uun murtaa’u. Hoggantoonni magaalotaa muuxannoo simannaa keessummootaa gaarii ta’e kennuudhaan ergama kana deeggaru; dhimma marii irratti garuu yaada kennuu ykn dubbachuu irraa of qusatu."], ["Walga’iiwwan idil-addunyaa kamiyyuu keessatti itti gaafatamummaan jalqabaa bakka bu’aa mootummaa Itoophiyaa maalidha?", ["Dhimma hunda irratti yaada dhuunfaa isaa qofa ibsuu", "Ejjennoo akka biyyaalessaatti waliigalame kan biyya isaa amanamummaa fi kabajaan bakka bu’ee ibsuu", "Paartii siyaasaa isaa yookaan naannoo irraa dhufe dursee bakka bu’uu", "Waan hirmaattonni deeggaruun harka itti rukutan kamiyyuu dubbachuu"], "Bakka bu’aan mootummaa maqaa mootummaa sanaatiin dubbata. Yaadawwan dhuunfaa fi fedhiileen naannoo keessaa marii keessoo keessatti ka’u; fuula dhaggeeffattoota biyya alaa duratti garuu matumaa hin dhiyaatan."], ["Magaalaan Shaggar ergama biyyaalessaa COP32 keessatti gumaacha cimaa akkamii gochuu dandeessi?", ["Gargaarsa maallaqaa jijjiirama qilleensaa (Climate Finance) dhaabbilee deeggarsaa waliin kallattiin mari’achuu", "Imaammata hariiroo alaa mataa ishee baafachuun dhiyeessuu", "Karoora biyyaalessaa wajjin walsimsiisuun magaalaa nageenya qabdu, qulqulluu, sirna qabduu fi keessummoota simattu taasisuu", "Walgahiin hanga jalqabutti eeguu fi erga jalqabee booda tarkaanfii fudhachuu"], "Keessummoonni biyya tokko kan madaalan waan isaan quunnaman irratti hundaa’uunidha. Isaanis geejjiba, qulqullina, nageenya, kabajaa fi simannaa gaarii, akkasumas qulqullina tajaajilaa ilaalu. Dursanii qophaa’uun, caasaa qindeessaa biyyaalessaa waliin walsimsiisuun, gumaacha dipilomaasii dhugaa magaalichi taasisu dha."], ["Ati Kantiibaa Itti Aanaa Magaalaa Shaggar taatee biyya biraatti irbaata sirna mootummaa irratti hirmaachaa jirta. Keessummeessitoonni kee akkamitti si ilaaluu qabu?", ["Akka nama dhuunfaa bashannana irra jiru tokkootti", "Sadarkaan hojii kee maaliyyuu yoo ta’e, akka bakka bu’aa Itoophiyaatti", "Akka bakka bu’aa paartii siyaasaa kee qofaatti", "Akka keessummaa cal’isaa hin mul’anne tokkootti"], "Biyya alaa keessatti, hojjetaan mootummaa hundi fuula biyyasaa bakka bu’ee ilaalama. Jechoonni inni dubbatu, uffannaan isaa, yeroo kabajuun isaa fi amala isaa hundi ilaalcha namoonni Itoophiyaa irratti qaban ni bocu."], ["Yeroo irbaata sirna qabeessaa teessuma murtaa’e qabu keessatti, keessummaan kabajaa (Guest of Honour) aadaa sirna dippilomaasii keessatti eessa taa’a?", ["Gara mirga keessummeessaa", "Teessuma qophaa’e gara dhumaa irra kophaa isaa", "Seensa balbalaa bira", "Bakka teessoon duwwaan jiru kamiyyuu"], "Yeroo hedduu aadaa pirootokoolii keessatti, harki mirgaa bakka kabajaa olaanaa qabuudha. Yeroo hunda, bakka taa’umsa qophaa’ee qondaala pirootokoolii irraa kenname hordofaa; ofii keessanii murteessitanii bakka taa’umsaa hin jijjiirinaa."], ["Kabajamaan bakka bu’aan daawwannaa dhufe tokko sababa aadaa yookaan amantii isaatiin harka wal qabachuun nagaa si gaafachuu yoo dide, deebiin kee inni sirrii ta’e maalidha?", ["Hanga inni harka si qabee si dubbisuu jalqabuutti harka kee diriirsitee eeguu", "Aarii agarsiisuu fi irraa fagaachuu", "Fuula tasgabbaa’aa fi gammachuu qabuun, harka kee gara laphee keetti kaa’uun, mataa raasuun nagaa itti fufuu", "Fuula namoota hundaa duratti maaliif akka dide gaafachuu"], "Haala ho’aa fi nama hin qaanessineen haala jiruutti of madaqsuu jechuun mallattoo keessummeessaa ogummaa qabuuti. Keessummaan tokko filannoo dhuunfaa yookaan aadaa isaa akka ibsu ykn sababa isaa akka himu matumaa hin dirqisiisinaa."], ["Gareen bakka bu’oota biyya alaa tokko kennaa yoo siif dhiyeesse maal gochuu qabda?", ["Kennaan shakkisiisaa waan ta’eef dheekkamuun diduu", "Galateeffachuun fudhachuu; sana booda seera mootummaa kennaa fudhachuu fi ibsa kennuu ilaalchisee jiru hordofuun galmeessisuu", "Dhoksaan akka qabeenya dhuunfaatti qabachuu", "Fuula nama kennaa siif kenne duratti banuun kennaa sana irratti qeeqa dhiyeessuu"], "Yeroo kenname sana galata guddaadhaan simadhaa; sana booda kennaa galmeessuu fi ibsuu ilaalchisee seera mootummaa fi qajeelfama hojii irra jiru hordofaa. Kunis ofii keessanii fi dhaabbata keessan balaa irraa eega."], ["Konvoyiin Ministira Dhimma Alaa biyya tokkoo boru magaalaa kee keessa seenuuf jira. Miira gammachuu kana miidiyaa hawaasaa irratti qooduu barbaadda. Karaan sirrii ta’e kami?", ["Namoonni akka simachuuf dhufaniif yeroo inni itti dhufu fi daandii irra dhufu kallattiin maxxansuu", "Sochii isaanii dursee maxxansuu irraa of qusachuun, erga isaan dhufanii booda suuraawwan hayyama garee pirootokoolii fi nageenyaa argatan qofa qooduu", "Maqaa hoteela isaan bu’an fi lakkoofsa darbii kutaa isaan bu’an maxxansuu", "Bilbila kee fayyadamuun waan hunda kallattiin tamsaasuu"], "Sochiin yeroo sanaa fi iddoon namoota kabajamoo sadarkaa olaanaa qaban nageenyaaf balaa uumuu danda’a. Odeeffannoo hayyamame qofa qoodaa; innis erga sochiin sun raawwatamee booda."], ["Gaazexeessaan biyya alaa tokko dhimma marii biyyaalessaa irratti gaaffii miira nama kakaasu yoo si gaafate, deebiin kee maalidha?", ["Yaada dhuunfaa kee amanamummaan ibsuu", "Ajandaa guddaa uumuuf waan nama ajaa’ibsiisu dubbachuu", "Aariidhaan diduu fi bakka sanaa deemuu", "Kabajaan gara Kominikeeshinii Mootummaa Biyyaalessaatti isa qajeelchuu; akkasumas dhimmoota itti gaafatamummaa kee keessatti argaman, fakkeenyaaf qophii magaalaa, irratti dubbachuuf fedhii qabaachuu kee ibsuu"], "Haala kabaja qabuun dhimma sana gara biraatti qajeelchuun ergaa biyyaalessaa ni eega; yeroo wal fakkaatutti gargaarsa kennuu keessanis itti fuftu. Aangoo fi itti gaafatamummaa hojii keessaniin walqabatu irratti ofitti amanamummaadhaan dubbachuu dandeessu."], ["Odeeffannoon sobaa Addis Ababaa fi Magaalaan Shaggar COP32 keessummeessuuf “qophii hin qaban” jedhu saffisaan miidiyaa hawaasaa irratti babal’achaa jira haa jennu. Hogganaan magaalaa maal gochuu qaba?", ["Aariidhaan toora miidiyaa hawaasaa dhuunfaa isaa irratti deebii kennuu", "Odeeffannoon sun dogoggora ta’uu utuu beekuu callisuu", "Dhugaa jiru mirkaneessuu fi karaa miidiyaa mootummaa odeeffannoo sirrii, tasgabbaa’aa fi hayyamame qofa dhiyeessuu", "Oduu sobaa biraa deebisee maxxansuu"], "Dhugaawwan irratti hundaa’aa, tasgabbiidhaan dubbadhaa, akkasumas karaa qaamolee mootummaa aangoo qabaniin deebii kennaa. Dhuunfaatti falmuun odeeffannoo sobaa sana caalaatti babal’isuu fi gahee keessan akka hojjetaa mootummaa tokkootti qabdan xiqqeessuu danda’a."], ["Akkaawuntiin miidiyaa hawaasaa dhuunfaa kantiibaa tokkoo uummata biratti akka sagalee mootummaa tokkootti ilaalamuu danda’aa?", null, "Uummanni jalqaba aangoo itti aansuun nama dhuunfaa sana ilaala. Ergaawwan akkaawuntiiwwan dhuunfaa miidiyaa hawaasaa hoggantoota olaanoo irraa darban illee akka ergaa mootummaa of keessaa qabanitti ilaalamu."], ["Suuraa hoogganaa kabajamaa biyya alaa daawwannaaf dhufe tokko mata-duree waa’ee siyaasaa biyya isaa ibsu ilaalcha mataa keetii itti dabaluun maxxansuun sirriidhaa?", null, "Dhimma siyaasaa biyya biraa ilaalchisee yaada kennuun rakkoo dipilomaasii uumuu danda’a. Yaadawwan suuraa waliin maxxanfaman kabaja kan eeganii fi dhugaa irratti kan hundaa’an haa ta’an."], ["Yeroo hojii mootummaa idileetiif biyya alaa jirtutti imaammata mootummaa biyya kee uummata duratti qeequun ni danda’amaa?", null, "Waldhabdeen karaa sirrii fi qaamolee dhimmi ilaallatuun, sirna mootummaa keessatti furmaata argata malee, fuula dhaggeeffattoota biyya alaa duratti hin dhiyaatu."], ["Yeroo kabajuu yookaan eeguun (Punctuality) qaama kabaja dippilomaasii ta’aa?", null, "Yeroo eeguun mallattoo kabajaati. Yeroo eeganii dursanii argamuun dhimma sanaaf xiyyeeffannoo fi cimina qabaachuu agarsiisa; yeroo dabarsanii argamuun immoo faallaa isaa mul’isa."], ["Hogganaan tokko keessummaa michuu isaa gammachiisuuf jecha battalumatti karoora teessuma qondaala pirootokoolii jijjiiruu danda’aa?", null, "Tartibni teessumaa, sadarkaan aangoo fi alaabaan sababoota murtaa’oo irratti hundaa’uun karoorfamu. Isaan kana jijjiiruun kan danda’amu karaa qondaala pirootokoolii qofaan."], ["Lakkoofsa hin mirkanoofne, fakkeenyaaf baay’ina bakka bu’oota dhufanii fi dandeettii simannaa hoteelotaa, dinqisiifannaa uumuudhaaf miidiyaa hawaasaa irratti maxxansuun sirriidhaa?", null, "Lakkoofsotni hin mirkanoofne invastarootaafi keessummoota dogoggorsuu, akkasumas garee biyyaalessaa salphisuu danda’u. Kanaafuu, lakkoofsota mirkanaa’anii fi qaama mootummaa dhimmi ilaallatuun raggaasifaman qofa fayyadamaa."], ["Itoophiyaan bara 2027 Addis Ababa keessatti COP32 keessummeessuuf karoorfatteettii?", null, "Itoophiyaan Beelem keessatti biyyoota Afrikaatiin COP30 akka biyya keessummeessituuf filatamtee mirkanaa’teetti. Gabaasawwan akka agarsiisanitti, walgahiin kun Sadaasa 2027 keessa Finfinneetti gaggeeffamuuf karoorfameera; bakka bu’oonni 60,000 ol ta’an akka hirmaatan eegama. Guyyoota sirrii ta’an Waajjira Sekireetariyaatii Biyyaalessaa (National Secretariat) irraa mirkaneeffadhaa."], ["Bulchiinsi magaalaa tokko hayyama Mootummaa Federaalaa malee maqaa Itoophiyaatiin waliigaltee dirqama qabu kan maallaqa jijjiirama qilleensaa idil-addunyaa wajjin walqabatu mallatteessuu danda’aa?", null, "Hariiroon biyyoota alaa fi waliigalteewwan idil-addunyaa seeraan dirqama ta’an karaa mootummaa biyyaalessaatiin raawwatamu. Magaalonni simannaa keessummootaa qopheessuu, waliin hojjechuu fi dandeettii isaanii agarsiisuu ni danda’u; kunis qindoomina mootummaa biyyaalessaa waliin ta’een raawwatamuu qaba."], ["Yeroo walgahiiwwan sirna mootummaa fi ayyaanota kabajamoo, bilbiloonni callisifamanii fageeffamanii kaa’amuu qabuu?", null, "Yeroo walga’ii bilbila keessan ilaaluu ykn itti fayyadamuun kabaja fi naamusa dhabuu akka ta’etti ilaalama. Kanaaf, bilbila keessan sagalee malee (Silent) irratti qabadhaa; yoo barbaachise immoo karaa baratamaa ta’een yaadannoo barreessaa."], ["Waa’ee siyaasaa biyya keessummaan irraa dhufe tokkoo qoosuun karaa gaarii fi sirrii kan marii jalqabsiisu ta’uu danda’aa?", null, "Qoosaan salphaatti gara badaatti saffisaan hiikamuu danda’a. Mata dureewwan haasawa jalqabsiisuuf mijatoo ta’an haala qilleensaa, nyaata, aadaa, imala fi fedhiiwwan waloo dha."], ["Dippilomaasiin hojii Ambaasaaddarootaa fi hojjettoota Ministeera Dhimma Alaa qofaadhaa?", null, "Diplomaasiin hojii guyyaa guyyaa nama hundaati: keessummeessaan, tola oolaan, konkolaachisaan fi hojjetaan mootummaa magaalaa hundi keessummaa biratti biyya isaanii bakka bu’u."], ["Yaada aarii qabu kan namni tokko walgahii sana irratti miidiyaa hawaasaa irratti barreesseef miira aariitiin deebii kennuun sirriidhaa?", null, "Aarii aariidhaan deebisuun dhimma sana caalaatti hammeessa. Dhugaa irratti hundaa’uun, karaa sirrii ta’een deebii kenni; yookaan guutumaan guutuutti deebii hin kennin."], ["Keessummoonni idil-addunyaa yeroo biyya keessummeessituu tokko daawwatan, waan akkamiitu yaada cimaa fi yaadannoo guddaa isaanii keessatti hafu ta’uu danda’a?", ["Faajjii guddaa buufata xiyyaaraa irratti argamu", "Tarree dheeraa haasaawwan mootummaa", "Simannaa ho’aa fi qabiinsa gaarii walitti dhufeenya dhuunfaa keessummoonni hundi argatan", "Gatii kutaalee hoteelaa"], "Bakka bu’oonni ibsa qabatanii dhufu, miira qabatanii deemu. Keessummeessummaan yaadatamuu fi walitti fufiinsa qabu mallattoo beekamtii biyyaalessaa isa yeroo dheeraa turuudha."], ["Sirna buna Itoophiyaa keessummoota daawwannaa dhufaniitti agarsiisuu barbaadda. Karaan gaarii fi bu’a-qabeessi kami?", ["Sagantaan akka hin harkifanneef saffisaan burciqqoo yeroo tokkoof oolu keessatti dhiyeessuu", "Akka muuxannoo simannaa bareedaa ta’etti dhiyeessuu; hiikkaa aadaa isaa gabaabinaan ibsuu fi keessummoonni akka irratti hirmaatan affeeruu", "Keessummoota waliin wal hin simatu jedhanii dhiisuun irra darbuu", "Keessummootaaf kaffaltii addaa gaafachuu"], "Sirni bunaa seenaa beekamtii biyyaa ta’uu kan danda’eef hirmaannaa waan qabuuf, kan hin ariifachiisne waan ta’eef, akkasumas waa’ee simannaa Itoophiyaa waan dhugaa keessummootatti waan himuufi."], ["Sababoonni adda addaa Magaalaa Shaggar akka magaalaa keessummeessituu adda taate taasisan maal fa’i?", ["Simannaa ho’aa qofa; sadarkaaleen tajaajilaa barbaachisoo miti", "Sirna cimaa qofa; simannaan ho’aan ogummaa dhabuu agarsiisa", "Akkaataa biyya biraa itti qopheessan guutummaatti fakkeessuu", "Simannaa dhugaa fi ho’aa Itoophiyaa, tajaajila ogummaa qabu, sadarkaa wal-fakkaataa fi qulqullina qabuun dhiyeessuu"], "Simannaa ho’aa fi sadarkaa tajaajilaa idil-addunyaa wal hin faallessan. Keessummoonni isa jalqabaa barbaadu, isa lammaffaa immoo eegu: yeroo eeguu, odeeffannoo qabaachuu, ifa ta’uu fi walitti fufiinsa."], ["Konkolaachiftoonni taaksii, hojjettoonni hoteelaa, namoonni fedhiidhaan tajaajilan fi daldaltoonni keessummoota baay’ee ni qunnamu. Magaalaan isaaniif maal gochuu qabdi?", ["Leenjii fi qajeelfama kabaja, odeeffannoo sirrii, Afaan Ingilizii bu’uuraa, nageenya fi gaaffiiwwan gara eenyuutti akka dabarsan irratti hubannoo kennuu", "Namoota biyya alaa irraa dhufan waliin akka hin dubbannetti ajajuu", "Akka fedhanitti akka hojjetaniif isaaniif dhiisuu", "Hoggantoota olaanoo qofa leenjisuu"], "Namoonni keessummoota fuulduratti quunnaman fuula magaalaati. Leenjiin gabaabaa fi qabatamaan miidhagina gatii guddaa baasu caalaa jijjiirama guddaa fida."], ["Keessummaan gaaffii ati deebii isaa hin beekne tokko si gaafate. Maal gochuu qabda?", ["Akka hin beekne sirratti akka hin baramneef deebii sobaa uumuun deebisuu", "Kabajaan, “Qoradhee siif deebisa” jechuu; sana booda gara nama sirrii yookaan wiirtuu odeeffannootti isa qajeelchuu", "Gaafficha tuffachuu", "Dhimmi sun hojii kee akka hin taane itti himuu"], "Deebii dogoggoraa ofitti amanamummaan kennuu caalaa, dhugaa dubbachuun tarkaanfii itti aanu gargaaru waliin amanamummaa guddaa ijaara."], ["Agarsiisa akkamiitu Magaalaa Shaggar mata-duree COP32 waliin caalaatti walitti hidha?", ["Sirboota aadaa fi nyaata aadaa qofa", "Pirojektoota ijaarsaa gurguddoo qofa", "Aadaa fi keessummeessummaa hojiiwwan qabatamaa jijjiirama qilleensaa ittisan, kanneen akka iddoowwan magariisaa, tajaajila geejjibaa qulqulluu fi walitti hidhamiinsa oomishaalee naannoo itti fufiinsa qaban waliin dhiyeessuu", "Homaa; keessummoota wiirtuu walgahii keessatti qofa tursiisuu"], "Fakkeenyonni qabatamaa fi mul’atan magaalattii miidhagina ergaa biyyaalessaa naannoo jiru utuu hin taane ragaa ergaa sanaa taasisu."], ["Daldaltoonni xixiqqaan naannoo keessatti baay’ina keessummootaa dabaluu isaa argan. Wanti magaalaa fi maqaa gaarii biyyaalessaa caalaatti tajaajilu kami?", ["Yeroo keessummoonni biyya keessa jiranitti hamma danda’ametti kaffaltii guddaa isaan gaafachuu", "Gatii madaalawaa, iftoomina qabu fi qulqullina tajaajilaa wal-fakkaataa eeguudhaan qajeelfama naannoo ifa ta’een deeggaruu", "Gatiiwwan tajaajilaa dhoksuu", "Yeroo walgahii sanaatti manneen daldalaa cufuu"], "Odeeffannoo ifa ta’e, gatii madaalawaa fi to’annoon qulqullinaa galii fi maqaa gaarii biyyaa lamaanuu eegu."], ["Keessummaan tokko geejjiba dhabee yookaan dogoggora galmee (Booking) isa mudateen yoo rakkate, Magaalaan keessummeessituu gaariin akkamitti deebii kennuu qabdi?", ["Rakkoon akka hin jirretti fakkeessuu", "Fuula uummataa duratti waajjira biraa komachuu", "Hanga keessummaan miidiyaa hawaasaa irratti komatutti eeguu", "Bakka quunnamtii ifa ta’e fi karaa rakkoon itti furamu diriirsuu; saffisaan deebii dhugaa kennuu"], "Walgahii kamiyyuu irratti rakkoon ni uumama. Keessummoonni magaalaa keessummeessitu kan madaalan akkamitti tasgabbiidhaan fi saffisaan deebii akka kennitu ilaaluuni."], ["Suuraawwan fi maxxansi keessummoonni muuxannoo isaanii magaalaa keessatti argatan irratti miidiyaa hawaasaa isaaniirraa qoodan, akkuma duula beeksisa mootummaa maqaa Itoophiyaa irratti dhiibbaa ni uumu?", null, "Suuraawwan fi seenaan keessummaa tokkoo ergaa mootummaa caalaa fagootti imalu. Qulqullinni, kabajni fi nageenyi hundi kan qoodaman dha."], ["Magaalaan muuxannoo amma kennuu hin dandeenye tokko keessummootaaf akka magaalaa hawwatutti waadaa galuun, ogummaadhaa?", null, "Waadaa hin raawwatamne galuun amanamummaa balleessa. Cimina dhugaa agarsiisi, waan ammallee hojii irra jiru irratti dhugaa dubbadhu, waadaa kees raawwadhu."], ["Amalli hogganaa tokko keessummootaa fi hojjettoota isaa waliin qabu aadaa keessummeessummaa magaalaa guutuu irratti dhiibbaa ni qaba?", null, "Hoggantoonni amala isaaniitiin, sadarkaa isaaniitiin fi yaada hojjettoota fuulduraa dhaggeeffachuuf fedhii qabaachuu isaaniitiin aadaa keessummeessummaa murteessu."]];
+
 const perRound={1:0,2:0,3:0};
-const QUESTIONS=RAW.map((r,i)=>{const yn=r[1]==='yn';return{id:i+1,round:r[0],num:++perRound[r[0]],type:r[1],q:r[2],options:yn?['Yes','No']:r[3],answer:yn?(r[4]==='Yes'?0:1):'ABCD'.indexOf(r[4]),why:r[5]}});
+const QUESTIONS=RAW.map((r,i)=>{const yn=r[1]==='yn';return{id:i+1,round:r[0],num:++perRound[r[0]],type:r[1],q:r[2],options:yn?['Yes','No']:r[3],answer:yn?(r[4]==='Yes'?0:1):'ABCD'.indexOf(r[4]),why:r[5],
+  om:{q:OM[i][0],options:yn?['Eeyyee','Lakki']:OM[i][1],why:OM[i][2]}}});
 const byRound=r=>QUESTIONS.filter(q=>q.round===r);
-const GAMES={
-  1:{name:'Lucky Bowl',desc:'Draw numbered balls from the glass bowl. Each ball opens a protocol scenario.',meta:['10 questions','Multiple choice','No time limit']},
-  2:{name:'Stamp It',desc:'Rapid fire briefs. Stamp YES or NO before the clock runs out.',meta:['12 questions','Yes or no',`${STAMP_SECONDS} seconds each`]},
-  3:{name:'Road to COP32',desc:'Travel from the welcome desk to the summit. Every right answer lights up a stop.',meta:['11 questions','Mixed','No time limit']}
+
+/* ===================== LANGUAGE ===================== */
+const I18N={
+ en:{
+  eyebrow:'Shaggar City · COP32 readiness', brand:'Diplomat <span>Challenge</span>', changeName:'Change name',
+  pickTitle:"Who's <span>playing?</span>", pickLedeScreen:'Next player: find your name to start. Your score is saved under your name.',
+  pickLedePhone:'Find your name to start. This phone will remember you.', searchPh:'Type your name',
+  guestPh:'Not on the list? Type your name', guestGo:'Play as guest', noMatch:'No name matches. Check the spelling, or play as a guest below.',
+  homeLede:'Three rounds on protocol, conduct and hospitality for COP32. The host opens one round at a time, and you play each round once.',
+  welcome:'Welcome, <span>{name}</span>', round:'Round {n}', roundGame:'Round {n} · {game}',
+  waitEyebrow:'Please wait', waitTitle:'The next round opens soon', waitText:'The host will open a round from the stage. This page updates by itself.', waitHost:'Waiting for the host',
+  doneEyebrow:'Round {n} · done', doneText:'You have played this round. Each round can be played once. The host will open the next round soon.',
+  waitNext:'Waiting for the next round', nextPlayer:'Next player', openEyebrow:'Round {n} is open', play:'Play round {n}',
+  ball:'Ball', brief:'Brief', stop:'Stop', right:'Right',
+  draw:'Draw a ball', hintDraw:'Tap Draw to mix the bowl', hintMixing:'Mixing the bowl...', hintNext:'Tap Draw for the next ball', bowlBand:'SHAGGAR CITY',
+  ballLabel:'Ball {n} · {left} left in the bowl', nextDraw:'Next draw', seeScore:'See my score',
+  timeLeft:'Time left', briefTag:'Official brief', briefN:'Brief {n} of {of}',
+  stampIntro:'Rapid fire: yes or no', stampRules:'Read each brief and stamp YES or NO within {s} seconds. When the bar runs out, the brief is marked wrong.',
+  start:'Start', yes:'Yes', no:'No', nextBrief:'Next brief', stampTime:'TIME',
+  timeUp:"Time's up · the answer is {a}", answerIs:'{line} · the answer is {a}',
+  nextStop:'Next stop: <span>{s}</span>', reached:'You reached the <span>COP32 Summit</span>', answerMove:'Answer to move on', moveOn:'Move on', stopLabel:'Stop {n} of {of} · {s}',
+  startStop:'Start', summit:'COP32 Summit', question:'Question {n}', why:'Why', cont:'Continue',
+  yourAnswers:'Your answers', backRounds:'Back to my rounds',
+  res90:'Outstanding. A true diplomat.', res70:'Strong result. Well done.', res50:'Good effort. Read the explanations again.', res0:'Keep learning. Every answer had a lesson.',
+  saved:'Score saved', saving:'Saving your score...', offline:'No connection. Your score is kept on this device and will be sent automatically.',
+  footer:'Shaggar City Administration · Powered by Shaggar BPO',
+  yesLines:['Correct!','Spot on!','Well done!','Galatoomi! Correct!','Excellent diplomacy!'], noLines:['Not quite','So close','Not this time'],
+  stops:['Welcome desk','Airport arrival','Hotel check-in','Protocol briefing','Coffee ceremony','Press room','City tour','Green Shaggar','Business forum','Official dinner','Closing session'],
+  games:{
+   1:{name:'Lucky Bowl',desc:'Draw numbered balls from the glass bowl. Each ball opens a protocol scenario.',meta:['10 questions','Multiple choice','No time limit']},
+   2:{name:'Stamp It',desc:'Rapid fire briefs. Stamp YES or NO before the clock runs out.',meta:['12 questions','Yes or no','{s} seconds each']},
+   3:{name:'Road to COP32',desc:'Travel from the welcome desk to the summit. Every right answer lights up a stop.',meta:['11 questions','Mixed','No time limit']}}
+ },
+ om:{
+  eyebrow:'Magaalaa Shaggar · Qophii COP32', brand:'Dorgommii <span>Diplomaasii</span>', changeName:'Maqaa jijjiiri',
+  pickTitle:'Eenyutu <span>taphata?</span>', pickLedeScreen:'Taphataa itti aanu: jalqabuuf maqaa kee barbaadi. Qabxiin kee maqaa keetiin galmaa’a.',
+  pickLedePhone:'Jalqabuuf maqaa kee barbaadi. Bilbilli kun si yaadata.', searchPh:'Maqaa kee barreessi',
+  guestPh:'Tarree keessa hin jirtu? Maqaa kee barreessi', guestGo:'Akka keessummaatti taphadhu', noMatch:'Maqaan walsimu hin jiru. Barreeffama isaa mirkaneessi, yookaan gadiitti akka keessummaatti taphadhu.',
+  homeLede:'Marsaa sadii: pirootokoolii, naamusa hojii fi keessummeessummaa COP32. Qindeessaan marsaa tokko tokkoon bana; marsaa tokko al tokko qofa taphatta.',
+  welcome:'Baga nagaan dhufte, <span>{name}</span>', round:'Marsaa {n}ffaa', roundGame:'Marsaa {n}ffaa · {game}',
+  waitEyebrow:'Maaloo eegi', waitTitle:'Marsaan itti aanu dhiyootti banama', waitText:'Qindeessaan waltajjii irraa marsaa ni bana. Fuulli kun ofumaan haaromfama.', waitHost:'Qindeessaa eegaa jira',
+  doneEyebrow:'Marsaa {n}ffaa · xumurameera', doneText:'Marsaa kana taphatteetta. Marsaan tokko al tokko qofa taphatama. Qindeessaan marsaa itti aanu dhiyootti bana.',
+  waitNext:'Marsaa itti aanu eegaa jira', nextPlayer:'Taphataa itti aanu', openEyebrow:'Marsaan {n}ffaa banameera', play:'Marsaa {n}ffaa taphadhu',
+  ball:'Kubbaa', brief:'Gaaffii', stop:'Buufata', right:'Sirrii',
+  draw:'Kubbaa baasi', hintDraw:'Qodaa makuuf “Kubbaa baasi” tuqi', hintMixing:'Qodaan makamaa jira...', hintNext:'Kubbaa itti aanuuf “Kubbaa baasi” tuqi', bowlBand:'MAGAALAA SHAGGAR',
+  ballLabel:'Kubbaa {n} · qodaa keessa {left} hafan', nextDraw:'Kubbaa itti aanu', seeScore:'Qabxii koo ilaali',
+  timeLeft:'Yeroo hafe', briefTag:'Gaaffii saffisaa', briefN:'Gaaffii {n} / {of}',
+  stampIntro:'Gaaffii saffisaa: Eeyyee yookaan Lakki', stampRules:'Gaaffii tokkoon tokkoon isaa dubbisii sekondii {s} keessatti EEYYEE yookaan LAKKI chaappaa rukuti. Yoo yeroon dhume, deebiin sun akka dogoggoraatti lakkaa’ama.',
+  start:'Jalqabi', yes:'Eeyyee', no:'Lakki', nextBrief:'Gaaffii itti aanu', stampTime:'YEROO',
+  timeUp:'Yeroon dhumeera · deebiin sirriin {a}', answerIs:'{line} · deebiin sirriin {a}',
+  nextStop:'Buufata itti aanu: <span>{s}</span>', reached:'<span>Walgahii COP32</span> geesseetta', answerMove:'Deebisii itti fufi', moveOn:'Itti fufi', stopLabel:'Buufata {n} / {of} · {s}',
+  startStop:'Jalqaba', summit:'Walgahii COP32', question:'Gaaffii {n}', why:'Sababa', cont:'Itti fufi',
+  yourAnswers:'Deebiiwwan kee', backRounds:'Gara marsaawwan kootti deebi’i',
+  res90:'Baay’ee olaanaa! Diplomaatii dhugaa.', res70:'Bu’aa cimaa. Baga gammadde.', res50:'Carraaqqii gaarii. Ibsawwan irra deebi’ii dubbisi.', res0:'Barachuu itti fufi. Deebiin hundi barumsa qaba.',
+  saved:'Qabxiin kee galmaa’eera', saving:'Qabxiin kee galmaa’aa jira...', offline:'Quunnamtiin hin jiru. Qabxiin kee meeshaa kana irratti eegamee ofumaan ni ergama.',
+  footer:'Bulchiinsa Magaalaa Shaggar · Shaggar BPO’n qophaa’e',
+  yesLines:['Sirrii!','Baay’ee gaarii!','Galatoomi! Sirrii!','Diplomaasii olaanaa!','Baga gammadde!'], noLines:['Sirrii miti','Dhiyaatteetta','Ammaaf miti'],
+  stops:['Bakka simannaa','Buufata xiyyaaraa','Galmee hoteelaa','Ibsa pirootokoolii','Sirna buna','Kutaa miidiyaa','Daawwannaa magaalaa','Shaggar magariisa','Marii daldalaa','Irbaata sirnaa','Sirna cufiinsaa'],
+  games:{
+   1:{name:'Qodaa Carraa',desc:'Kubbaawwan lakkoofsa qaban qodaa daawwitii keessaa baasi. Kubbaan tokkoon tokkoon isaa gaaffii pirootokoolii tokko bana.',meta:['Gaaffilee 10','Filannoo hedduu','Daangaa yeroo hin qabu']},
+   2:{name:'Chaappaa Rukuti',desc:'Gaaffilee saffisaa. Yeroon osoo hin dhumin EEYYEE yookaan LAKKI chaappaa rukuti.',meta:['Gaaffilee 12','Eeyyee yookaan Lakki','Tokkoon tokkoon sekondii {s}']},
+   3:{name:'Karaa COP32',desc:'Bakka simannaa irraa hanga walgahii COP32tti imaladhu. Deebiin sirriin hundi buufata tokko ibsa.',meta:['Gaaffilee 11','Makaa','Daangaa yeroo hin qabu']}}
+ }
 };
-const STOPS=['Welcome desk','Airport arrival','Hotel check-in','Protocol briefing','Coffee ceremony','Press room','City tour','Green Shaggar','Business forum','Official dinner','Closing session'];
+let lang=(()=>{try{const v=localStorage.getItem('sdc-lang');return v==='en'||v==='om'?v:DEFAULT_LANG}catch(e){return DEFAULT_LANG}})();
+const fill=(s,v)=>String(s).replace(/\{(\w+)\}/g,(m,k)=>v&&v[k]!==undefined?v[k]:m);
+function t(key,v){const d=I18N[lang][key]!==undefined?I18N[lang][key]:I18N.en[key];return fill(d,{s:STAMP_SECONDS,...v})}
+const tl=key=>I18N[lang][key];
+const G=r=>{const g=I18N[lang].games[r];return{name:g.name,desc:g.desc,meta:g.meta.map(m=>fill(m,{s:STAMP_SECONDS}))}};
+const L=q=>lang==='om'?q.om:{q:q.q,options:q.options,why:q.why};
+const GAMES={1:{en:I18N.en.games[1]},2:{en:I18N.en.games[2]},3:{en:I18N.en.games[3]}};
 
 /* ===================== HELPERS ===================== */
 const $=id=>document.getElementById(id);
@@ -528,7 +600,8 @@ async function flushOutbox(){
   catch(e){setSync('offline')}
   finally{flushing=false}
 }
-function setSync(s){const el=$('sync'); if(!el) return; el.textContent=s==='ok'?'Score saved':s==='saving'?'Saving your score...':'No connection. Your score is kept on this device and will be sent automatically.'}
+let syncState='ok';
+function setSync(s){syncState=s; const el=$('sync'); if(!el) return; el.textContent=t(s==='ok'?'saved':s==='saving'?'saving':'offline')}
 setInterval(flushOutbox,15000);
 
 /* engagement tracking */
@@ -562,18 +635,44 @@ function view(name){
   window.scrollTo(0,0);
 }
 
+/* ---- language toggle: rewrites every visible text in place, even mid-question ---- */
+function applyLang(){
+  document.documentElement.lang=lang==='om'?'om':'en';
+  document.querySelectorAll('[data-i18n]').forEach(el=>el.textContent=t(el.dataset.i18n));
+  document.querySelectorAll('[data-i18n-html]').forEach(el=>el.innerHTML=t(el.dataset.i18nHtml));
+  document.querySelectorAll('[data-i18n-ph]').forEach(el=>{el.placeholder=t(el.dataset.i18nPh);el.setAttribute('aria-label',t(el.dataset.i18nPh))});
+  document.querySelectorAll('#lang button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.lang===lang)));
+  $('h-bowl').textContent=t('roundGame',{n:1,game:G(1).name});
+  $('h-stamp').textContent=t('roundGame',{n:2,game:G(2).name});
+  $('h-road').textContent=t('roundGame',{n:3,game:G(3).name});
+  $('bowl-hint').textContent=t(bowlHint);
+  if(current==='pick') renderPick();
+  if(current==='home') renderHome();
+  if(current==='stamp') renderStamp();
+  if(current==='road'&&RD.list.length) renderRoad();
+  if(current==='done') renderDone();
+  renderCard();
+}
+document.querySelectorAll('#lang button').forEach(b=>b.addEventListener('click',()=>{
+  if(b.dataset.lang===lang) return;
+  lang=b.dataset.lang;
+  try{localStorage.setItem('sdc-lang',lang)}catch(e){}
+  track('lang',lang==='om'?'Afaan Oromoo':'English');
+  applyLang();
+}));
+
 /* ---- name picker ---- */
 function showPick(){
   me=null; view('pick');
-  $('pick-lede').textContent=MODE==='screen'?'Next player: find your name to start. Your score is saved under your name.':'Find your name to start. This phone will remember you.';
-  $('search').value=''; renderNames('');
+  $('search').value=''; renderPick();
   if(MODE==='screen') $('search').focus({preventScroll:true});
 }
+function renderPick(){$('pick-lede').textContent=t(MODE==='screen'?'pickLedeScreen':'pickLedePhone'); renderNames($('search').value)}
 function renderNames(qs){
   const box=$('names'); box.innerHTML='';
   const words=qs.toLowerCase().split(/\s+/).filter(Boolean);
   const list=GUESTS.filter(g=>{const h=(g.name+' '+g.title).toLowerCase();return words.every(w=>h.includes(w))});
-  if(!list.length){box.innerHTML='<p class="no-match">No name matches. Check the spelling, or play as a guest below.</p>';return}
+  if(!list.length){box.innerHTML=`<p class="no-match">${esc(t('noMatch'))}</p>`;return}
   list.forEach(g=>{
     const b=document.createElement('button'); b.className='name-btn';
     b.innerHTML=`<b>${esc(g.name)}</b>${g.title?`<span>${esc(g.title)}</span>`:''}`;
@@ -608,22 +707,22 @@ async function goHome(){
 function renderHome(){
   if(!me) return;
   const first=me.name.replace(/^(H\.E|Mr|Ms|Mrs|Dr|Eng|A\/Commissioner)\.?,?\s+/i,'');
-  $('hello').innerHTML=`Welcome, <span>${esc(first)}</span>`;
+  $('hello').innerHTML=t('welcome',{name:esc(first)});
   const played=playedOf(me.id), r=cfg.round;
   $('my-scores').innerHTML=[1,2,3].map(n=>{const p=played[n];
-    return `<div class="ms${n===r?' now':''}"><small>Round ${n}</small><b>${p?`${p.score}/${p.total}`:'–'}</b><span>${esc(GAMES[n].name)}</span></div>`}).join('');
+    return `<div class="ms${n===r?' now':''}"><small>${esc(t('round',{n}))}</small><b>${p?`${p.score}/${p.total}`:'–'}</b><span>${esc(G(n).name)}</span></div>`}).join('');
   const card=$('round-card');
   if(!r){
-    card.innerHTML=`<p class="rc-eyebrow">Please wait</p><h2 class="rc-title">The next round opens soon</h2><p class="rc-desc">The host will open a round from the stage. This page updates by itself.</p><div class="waiting"><span class="pulse"></span>Waiting for the host</div>`;
+    card.innerHTML=`<p class="rc-eyebrow">${esc(t('waitEyebrow'))}</p><h2 class="rc-title">${esc(t('waitTitle'))}</h2><p class="rc-desc">${esc(t('waitText'))}</p><div class="waiting"><span class="pulse"></span>${esc(t('waitHost'))}</div>`;
     return;
   }
-  const g=GAMES[r], p=played[r];
+  const g=G(r), p=played[r];
   if(p){
-    card.innerHTML=`<p class="rc-eyebrow">Round ${r} · done</p><h2 class="rc-title">${esc(g.name)}: ${p.score}/${p.total}</h2><p class="rc-desc">You have played this round. Each round can be played once. The host will open the next round soon.</p><div class="waiting"><span class="pulse"></span>Waiting for the next round</div>${MODE==='screen'?'<button class="btn" id="home-next">Next player</button>':''}`;
+    card.innerHTML=`<p class="rc-eyebrow">${esc(t('doneEyebrow',{n:r}))}</p><h2 class="rc-title">${esc(g.name)}: ${p.score}/${p.total}</h2><p class="rc-desc">${esc(t('doneText'))}</p><div class="waiting"><span class="pulse"></span>${esc(t('waitNext'))}</div>${MODE==='screen'?`<button class="btn" id="home-next">${esc(t('nextPlayer'))}</button>`:''}`;
     const hn=$('home-next'); if(hn) hn.addEventListener('click',()=>{flushEvents();showPick()});
     return;
   }
-  card.innerHTML=`<p class="rc-eyebrow">Round ${r} is open</p><h2 class="rc-title">${esc(g.name)}</h2><p class="rc-desc">${esc(g.desc)}</p><div class="rc-meta">${g.meta.map(m=>`<span>${esc(m)}</span>`).join('')}</div><button class="btn" id="play">Play round ${r}</button>`;
+  card.innerHTML=`<p class="rc-eyebrow">${esc(t('openEyebrow',{n:r}))}</p><h2 class="rc-title">${esc(g.name)}</h2><p class="rc-desc">${esc(g.desc)}</p><div class="rc-meta">${g.meta.map(m=>`<span>${esc(m)}</span>`).join('')}</div><button class="btn" id="play">${esc(t('play',{n:r}))}</button>`;
   $('play').addEventListener('click',()=>startRound(r));
 }
 /* poll for the round the admin opened */
@@ -651,56 +750,78 @@ function finishRound(){
   const seconds=Math.round((Date.now()-g.started)/1000);
   markPlayed(me.id,g.round,g.right,g.total);
   const base={player:me.id,name:me.name,round:g.round,device:DEVICE,session:SESSION};
-  queue({action:'submit',result:{...base,game:GAMES[g.round].name,score:g.right,total:g.total,seconds},answers:g.answers.map(a=>({...base,...a}))});
+  queue({action:'submit',result:{...base,game:GAMES[g.round].en.name,score:g.right,total:g.total,seconds,lang},answers:g.answers.map(a=>({...base,...a}))});
   track('finish',`Round ${g.round}: ${g.right}/${g.total} in ${seconds}s`);
   flushEvents();
   view('done');
-  $('done-eyebrow').textContent=`Round ${g.round} · ${GAMES[g.round].name}`;
-  $('done-score').innerHTML=`${g.right}<small>/${g.total}</small>`;
-  const pct=g.right/g.total;
-  $('done-title').textContent=pct>=.9?'Outstanding. A true diplomat.':pct>=.7?'Strong result. Well done.':pct>=.5?'Good effort. Read the explanations again.':'Keep learning. Every answer had a lesson.';
-  $('done-review').innerHTML=g.answers.map((a,i)=>`<span class="rv ${a.correct?'ok':'bad'}" title="${esc(a.question)}">${i+1}</span>`).join('');
+  lastDone=g; renderDone();
   const nb=$('done-next');
-  nb.textContent=MODE==='screen'?'Next player':'Back to my rounds';
   nb.onclick=()=>{if(MODE==='screen'){flushEvents();showPick()}else goHome()};
-  if(pct>=.7) celebrate(true);
+  if(g.right/g.total>=.7) celebrate(true);
   setSync(outbox.length?'saving':'ok');
   nb.focus({preventScroll:true});
+}
+
+let lastDone=null;
+function renderDone(){
+  const g=lastDone; if(!g) return;
+  $('done-eyebrow').textContent=t('roundGame',{n:g.round,game:G(g.round).name});
+  $('done-score').innerHTML=`${g.right}<small>/${g.total}</small>`;
+  const pct=g.right/g.total;
+  $('done-title').textContent=t(pct>=.9?'res90':pct>=.7?'res70':pct>=.5?'res50':'res0');
+  $('done-review').innerHTML=g.answers.map((a,i)=>`<span class="rv ${a.correct?'ok':'bad'}" title="${esc(a.question)}">${i+1}</span>`).join('');
+  $('done-next').textContent=t(MODE==='screen'?'nextPlayer':'backRounds');
+  setSync(syncState);
 }
 
 /* ===================== SHARED QUESTION CARD ===================== */
 let askState=null;
 function ask(q,o={}){
   return new Promise(res=>{
-    askState={q,res,answered:false,ok:false,t0:performance.now()};
+    askState={q,res,o,answered:false,ok:false,chosen:-1,line:Math.floor(Math.random()*5),t0:performance.now()};
     $('badge').style.background=ballBg(o.color||'#00AAE7');
     $('badge-num').textContent=o.badge??q.num;
-    $('tag').textContent=`Round ${q.round} · ${GAMES[q.round].name}`;
-    $('count').textContent=o.label||`Question ${q.num}`;
-    $('q').textContent=q.q;
     const box=$('options'); box.innerHTML='';
-    q.options.forEach((txt,i)=>{
+    q.options.forEach((_,i)=>{
       const b=document.createElement('button'); b.className='opt';
-      b.innerHTML=`<span class="key">${q.type==='yn'?'YN'[i]:'ABCD'[i]}</span><span></span>`;
-      b.lastChild.textContent=txt; b.addEventListener('click',()=>answerCard(i)); box.appendChild(b);
+      b.innerHTML=`<span class="key"></span><span></span>`;
+      b.addEventListener('click',()=>answerCard(i)); box.appendChild(b);
     });
-    $('next').textContent=o.nextText||'Continue';
     $('result').hidden=true; $('overlay').hidden=false;
+    renderCard();
     const c=$('card'); c.style.animation='none'; void c.offsetWidth; c.style.animation='';
     box.firstChild.focus({preventScroll:true});
   });
 }
-const YES_LINES=['Correct!','Spot on!','Well done!','Galatoomi! Correct!','Excellent diplomacy!'];
-const NO_LINES=['Not quite','So close','Not this time'];
-const answerText=q=>q.type==='yn'?q.options[q.answer]:'ABCD'[q.answer];
+/* writes every piece of text on the open card in the current language */
+function renderCard(){
+  if(!askState) return;
+  const {q,o}=askState, l=L(q);
+  $('tag').textContent=t('roundGame',{n:q.round,game:G(q.round).name});
+  $('count').textContent=o.label?o.label():t('question',{n:q.num});
+  $('q').textContent=l.q;
+  [...$('options').children].forEach((b,i)=>{b.firstChild.textContent=q.type==='yn'?l.options[i][0]:'ABCD'[i]; b.lastChild.textContent=l.options[i]});
+  $('next').textContent=o.nextText?t(o.nextText):t('cont');
+  if(askState.answered){
+    $('verdict').textContent=verdictText(q,askState.chosen,askState.ok,askState.line);
+    $('why').textContent=l.why;
+  }
+}
+const answerText=q=>q.type==='yn'?L(q).options[q.answer]:'ABCD'[q.answer];
+function verdictText(q,i,ok,line){
+  const yes=tl('yesLines'), no=tl('noLines');
+  if(ok) return yes[line%yes.length];
+  if(i<0) return t('timeUp',{a:answerText(q)});
+  return t('answerIs',{line:no[line%no.length],a:answerText(q)});
+}
 function answerCard(i){
   if(!askState||askState.answered) return;
   const {q}=askState, ok=i===q.answer;
-  askState.answered=true; askState.ok=ok;
+  askState.answered=true; askState.ok=ok; askState.chosen=i;
   record(q,i,ok,performance.now()-askState.t0);
   [...$('options').children].forEach((b,j)=>{b.disabled=true; if(j===q.answer) b.classList.add('right'); else if(j===i) b.classList.add('wrong'); else b.classList.add('dim')});
-  const v=$('verdict'); v.textContent=ok?pick(YES_LINES):`${pick(NO_LINES)} · the answer is ${answerText(q)}`; v.className='verdict '+(ok?'ok':'bad');
-  $('why').textContent=q.why; $('result').hidden=false;
+  $('verdict').className='verdict '+(ok?'ok':'bad');
+  renderCard(); $('result').hidden=false;
   ok?cheer():boo();
   setTimeout(()=>$('next').focus({preventScroll:true}),50);
 }
@@ -720,9 +841,11 @@ function startBowl(){
     return {q,n:q.num,x:x+(Math.random()-.5)*.02,y,vx:0,vy:0,color:BALL_COLORS[i%4]}});
   B.state='idle'; B.rising=null; B.cupBall=null; B.drawn=0;
   $('bowl-of').textContent=N; $('bowl-n').textContent=0; $('bowl-right').textContent=0;
-  $('draw').disabled=false; $('bowl-hint').textContent='Tap Draw to mix the bowl';
+  $('draw').disabled=false; setBowlHint('hintDraw');
   layoutBowl();
 }
+let bowlHint='hintDraw';
+function setBowlHint(k){bowlHint=k; $('bowl-hint').textContent=t(k)}
 function layoutBowl(){const r=$('bowl-wrap').getBoundingClientRect(); if(!r.width) return; W=r.width;H=r.height;dpr=Math.min(2,devicePixelRatio||1);canvas.width=Math.round(W*dpr);canvas.height=Math.round(H*dpr);const above=1.9,below=1.45;R=Math.min(W/2.3,H/(above+below));cx=W/2;cy=(H-(above+below)*R)/2+above*R}
 new ResizeObserver(layoutBowl).observe($('bowl-wrap'));
 function stepBowl(dt){
@@ -762,7 +885,7 @@ function renderBowl(){
   ctx.save();stand();ctx.clip();ctx.fillStyle='#00AAE7';ctx.fillRect(cx-R,bandY-bandH/2,2*R,bandH);ctx.restore();
   ctx.fillStyle='#03284F';ctx.font=`800 ${Math.max(9,R*.068)}px "Bricolage Grotesque",sans-serif`;ctx.textAlign='center';ctx.textBaseline='middle';
   if('letterSpacing' in ctx) ctx.letterSpacing=`${R*.012}px`;
-  ctx.fillText('SHAGGAR CITY',cx,bandY+R*.005);
+  ctx.fillText(t('bowlBand'),cx,bandY+R*.005);
   if('letterSpacing' in ctx) ctx.letterSpacing='0px';
   const gg=ctx.createRadialGradient(cx-R*.3,cy-R*.3,R*.1,cx,cy,R);
   gg.addColorStop(0,'rgba(127,211,245,.14)');gg.addColorStop(1,'rgba(127,211,245,.03)');
@@ -794,16 +917,16 @@ function frame(now){
       if(now>=B.churnUntil){const b=B.balls.splice(Math.floor(Math.random()*B.balls.length),1)[0];B.rising={b,fx:b.x,fy:b.y,x:b.x,y:b.y,s:1,t0:now};B.state='rising';tone(520,.12,'sine',.2);tone(780,.18,'sine',.16,.08)}
     }
     if(B.state==='rising'){
-      const r=B.rising,endS=.15*1.75/B.K,t=Math.min(1,(now-r.t0)/(reduce?500:1150));
-      if(t<.45){const u=ease(t/.45);r.x=r.fx*(1-u);r.y=r.fy+(-1-r.fy)*u;r.s=1}
-      else{const u=ease((t-.45)/.55);r.x=0;r.y=-1-.58*u;r.s=1+(endS-1)*u}
-      if(t>=1){
+      const r=B.rising,endS=.15*1.75/B.K,p=Math.min(1,(now-r.t0)/(reduce?500:1150));
+      if(p<.45){const u=ease(p/.45);r.x=r.fx*(1-u);r.y=r.fy+(-1-r.fy)*u;r.s=1}
+      else{const u=ease((p-.45)/.55);r.x=0;r.y=-1-.58*u;r.s=1+(endS-1)*u}
+      if(p>=1){
         B.cupBall=r.b;B.cupAlpha=1;B.rising=null;B.state='asking';B.drawn++;tone(880,.15,'sine',.16);
         const b=B.cupBall,left=B.balls.length;$('bowl-n').textContent=B.drawn;
-        setTimeout(()=>ask(b.q,{badge:b.n,color:b.color==='#FFFFFF'?'#7FD3F5':b.color,label:`Ball ${b.n} · ${left} left in the bowl`,nextText:left?'Next draw':'See my score'}).then(()=>{
+        setTimeout(()=>ask(b.q,{badge:b.n,color:b.color==='#FFFFFF'?'#7FD3F5':b.color,label:()=>t('ballLabel',{n:b.n,left}),nextText:left?'nextDraw':'seeScore'}).then(()=>{
           $('bowl-right').textContent=game.right;
           if(!B.balls.length){finishRound();return}
-          B.state='idle';$('draw').disabled=false;$('bowl-hint').textContent='Tap Draw for the next ball';$('draw').focus({preventScroll:true});
+          B.state='idle';$('draw').disabled=false;setBowlHint('hintNext');$('draw').focus({preventScroll:true});
         }),350);
       }
     }
@@ -815,7 +938,7 @@ function frame(now){
 function drawAction(){
   if(B.state!=='idle'||!B.balls.length) return; ensureAudio();
   B.cupBall=null;B.state='churn';B.churnUntil=performance.now()+(reduce?800:2300);
-  $('draw').disabled=true;$('bowl-hint').textContent='Mixing the bowl...';
+  $('draw').disabled=true;setBowlHint('hintMixing');
 }
 $('draw').addEventListener('click',drawAction);
 
@@ -825,14 +948,28 @@ function startStamp(){
   view('stamp');
   S.list=shuffle(byRound(2));S.idx=0;S.phase='ready';
   $('doc-start').hidden=false;$('doc-play').hidden=true;$('doc-stamp').hidden=true;
-  $('st-of').textContent=S.list.length;$('st-n').textContent=0;$('st-right').textContent=0;$('doc-secs').textContent=STAMP_SECONDS;$('doc-ref').textContent='Official brief';
+  $('st-of').textContent=S.list.length;$('st-n').textContent=0;$('st-right').textContent=0;$('doc-secs').textContent=STAMP_SECONDS;
+  renderStamp();
   $('doc-go').focus({preventScroll:true});
 }
+/* writes the brief's text in the current language */
+function renderStamp(){
+  if(S.phase==='ready'){$('doc-ref').textContent=t('briefTag');return}
+  const q=S.list[S.idx], l=L(q);
+  $('doc-ref').textContent=t('briefN',{n:S.idx+1,of:S.list.length});
+  $('doc-q').textContent=l.q;
+  if(S.phase==='answered'){
+    const st=$('doc-stamp'); st.textContent=S.chosen<0?t('stampTime'):l.options[S.chosen].toUpperCase();
+    $('doc-verdict').textContent=verdictText(q,S.chosen,S.chosen===q.answer,S.line);
+    $('doc-why').textContent=l.why;
+    $('doc-next').textContent=t(S.idx<S.list.length-1?'nextBrief':'seeScore');
+  }
+}
 function showBrief(){
-  const q=S.list[S.idx];S.phase='q';
+  S.phase='q';
   $('doc-start').hidden=true;$('doc-play').hidden=false;$('doc-stamp').hidden=true;$('doc-result').hidden=true;
-  $('doc-ref').textContent=`Brief ${S.idx+1} of ${S.list.length}`;$('st-n').textContent=S.idx+1;
-  $('doc-q').textContent=q.q;$('doc-yes').disabled=false;$('doc-no').disabled=false;
+  $('st-n').textContent=S.idx+1;
+  renderStamp();$('doc-yes').disabled=false;$('doc-no').disabled=false;
   $('doc-timer').classList.remove('low');$('doc-bar').style.transform='scaleX(1)';
   S.t0=performance.now();S.raf=requestAnimationFrame(tick);
 }
@@ -847,13 +984,14 @@ function tick(now){
 function stampAnswer(i){
   if(S.phase!=='q') return; S.phase='answered'; cancelAnimationFrame(S.raf);
   const q=S.list[S.idx],ok=i===q.answer;
+  S.chosen=i; S.line=Math.floor(Math.random()*5);
   record(q,i,ok,performance.now()-S.t0);
   $('doc-yes').disabled=true;$('doc-no').disabled=true;
-  const st=$('doc-stamp');st.textContent=i<0?'TIME':q.options[i].toUpperCase();st.className='stamp '+(ok?'ok':'bad');st.hidden=false;st.style.animation='none';void st.offsetWidth;st.style.animation='';
+  const st=$('doc-stamp');st.className='stamp '+(ok?'ok':'bad');st.hidden=false;st.style.animation='none';void st.offsetWidth;st.style.animation='';
   tone(110,.12,'square',.12);
   $('st-right').textContent=game.right;
-  const v=$('doc-verdict');v.textContent=ok?pick(YES_LINES):i<0?`Time's up · the answer is ${answerText(q)}`:`${pick(NO_LINES)} · the answer is ${answerText(q)}`;v.className='verdict '+(ok?'ok':'bad');
-  $('doc-why').textContent=q.why;$('doc-next').textContent=S.idx<S.list.length-1?'Next brief':'See my score';$('doc-result').hidden=false;
+  $('doc-verdict').className='verdict '+(ok?'ok':'bad');
+  renderStamp();$('doc-result').hidden=false;
   setTimeout(()=>{ok?cheer():boo()},120);setTimeout(()=>$('doc-next').focus({preventScroll:true}),50);
 }
 function nextBrief(){if(S.phase!=='answered') return; S.idx++; if(S.idx<S.list.length) showBrief(); else{S.phase='ready';finishRound()}}
@@ -867,7 +1005,7 @@ const RD={list:[],idx:0,marks:[],moved:false};
 function startRoad(){view('road');RD.list=shuffle(byRound(3));RD.idx=0;RD.marks=[];RD.moved=false;$('rd-of').textContent=RD.list.length;renderRoad()}
 function renderRoad(){
   const tr=$('track');tr.innerHTML='';const n=RD.list.length;
-  const names=['Start',...STOPS.slice(0,n-1),'COP32 Summit'];
+  const names=roadNames();
   tr.style.gridTemplateColumns=`repeat(${n+1},minmax(84px,1fr))`;tr.style.minWidth=`${(n+1)*84}px`;
   for(let k=0;k<=n;k++){
     const st=document.createElement('div');
@@ -881,14 +1019,15 @@ function renderRoad(){
   RD.moved=false;
   $('rd-n').textContent=RD.idx;$('rd-right').textContent=game?game.right:0;
   const done=RD.idx>=n;
-  $('next-stop').innerHTML=done?'You reached the <span>COP32 Summit</span>':`Next stop: <span>${esc(names[RD.idx+1])}</span>`;
-  $('road-go').textContent=done?'See my score':'Answer to move on';
+  $('next-stop').innerHTML=done?t('reached'):t('nextStop',{s:esc(names[RD.idx+1])});
+  $('road-go').textContent=t(done?'seeScore':'answerMove');
 }
+function roadNames(){const n=RD.list.length;return [t('startStop'),...tl('stops').slice(0,n-1),t('summit')]}
 function roadGo(){
   if(askState) return; ensureAudio();
   if(RD.idx>=RD.list.length){finishRound();return}
-  const q=RD.list[RD.idx],n=RD.list.length,names=[...STOPS.slice(0,n-1),'COP32 Summit'];
-  ask(q,{badge:RD.idx+1,label:`Stop ${RD.idx+1} of ${n} · ${names[RD.idx]}`,nextText:'Move on'}).then(ok=>{
+  const q=RD.list[RD.idx],n=RD.list.length,k=RD.idx;
+  ask(q,{badge:k+1,label:()=>t('stopLabel',{n:k+1,of:n,s:roadNames()[k+1]}),nextText:'moveOn'}).then(ok=>{
     RD.marks[RD.idx]=ok;RD.idx++;RD.moved=true;tone(660,.1,'triangle',.12);renderRoad();
     if(RD.idx>=RD.list.length) celebrate(true);
     $('road-go').focus({preventScroll:true});
@@ -912,14 +1051,6 @@ $('login-form').addEventListener('submit',async e=>{
   if(ok){ss.set('sdc-pw',adminPw);view('admin');clearInterval(adminTimer);adminTimer=setInterval(adminLoad,20000)}
 });
 $('adm-refresh').addEventListener('click',adminLoad);
-function leaveAdmin(){ss.del('sdc-pw');adminPw=null;clearInterval(adminTimer);location.hash=''}
-document.querySelectorAll('.to-game').forEach(el=>el.addEventListener('click',e=>{e.preventDefault();leaveAdmin()}));
-$('brand-link').addEventListener('click',e=>{
-  e.preventDefault();
-  if(MODE==='admin'){leaveAdmin();return}
-  if(['bowl','stamp','road'].includes(current)&&!confirm('Leave this round and go back to the start?')) return;
-  location.reload();
-});
 $('adm-out').addEventListener('click',()=>{ss.del('sdc-pw');adminPw=null;clearInterval(adminTimer);$('pw').value='';view('login')});
 async function setRound(r){
   const btns=[...$('round-seg').children];btns.forEach(b=>b.disabled=true);
@@ -947,7 +1078,8 @@ function renderAdmin(d){
   const avgPct=results.length?Math.round(results.reduce((s,r)=>s+r.score/r.total,0)/results.length*100):0;
   const byDev=d=>results.filter(r=>r.device===d).length;
   const changes=events.filter(e=>e.type==='change_name').length;
-  const kpis=[[players.size,'People taking part'],[results.length,'Rounds completed'],[`${avgPct}%`,'Average score'],[tapsTotal,'Taps recorded'],[activeNow,'Devices active now'],[`${byDev('phone')} / ${byDev('screen')}`,'Rounds on phone / screen'],[changes,'Player changes on screen']];
+  const byLang=l=>results.filter(r=>(r.lang||'en')===l).length;
+  const kpis=[[players.size,'People taking part'],[results.length,'Rounds completed'],[`${avgPct}%`,'Average score'],[tapsTotal,'Taps recorded'],[activeNow,'Devices active now'],[`${byDev('phone')} / ${byDev('screen')}`,'Rounds on phone / screen'],[`${byLang('om')} / ${byLang('en')}`,'Rounds in Afaan Oromoo / English'],[changes,'Player changes on screen']];
   $('kpis').innerHTML=kpis.map(([b,s])=>`<div class="kpi"><b>${esc(b)}</b><span>${esc(s)}</span></div>`).join('');
 
   $('t-rounds').innerHTML='<tr><th>Round</th><th class="num">Started</th><th class="num">Finished</th><th class="num">Completion</th><th class="num">Average score</th><th class="num">Avg time per question</th><th class="num">Left mid-game</th><th class="num">Taps</th></tr>'+[1,2,3].map(r=>{
@@ -957,7 +1089,7 @@ function renderAdmin(d){
     const ans=answers.filter(a=>a.round===r);const avgT=ans.length?(ans.reduce((s,a)=>s+a.ms,0)/ans.length/1000).toFixed(1)+' s':'–';
     const left=new Set(events.filter(e=>e.type==='left_midgame'&&e.round===r).map(e=>e.session)).size;
     const tp=events.filter(e=>e.type==='taps'&&e.round===r).reduce((s,e)=>s+(+e.detail||0),0);
-    return `<tr><td><b>Round ${r}</b> · ${esc(GAMES[r].name)} ${r===round?'<span class="pill">open</span>':''}</td><td class="num">${started}</td><td class="num">${finished}</td><td class="num">${started?pct(finished,started)+'%':'–'}</td><td class="num">${avg} / ${byRound(r).length}</td><td class="num">${avgT}</td><td class="num">${left}</td><td class="num">${tp}</td></tr>`}).join('');
+    return `<tr><td><b>Round ${r}</b> · ${esc(GAMES[r].en.name)} ${r===round?'<span class="pill">open</span>':''}</td><td class="num">${started}</td><td class="num">${finished}</td><td class="num">${started?pct(finished,started)+'%':'–'}</td><td class="num">${avg} / ${byRound(r).length}</td><td class="num">${avgT}</td><td class="num">${left}</td><td class="num">${tp}</td></tr>`}).join('');
 
   const board={};
   results.forEach(r=>{const b=board[r.player]=board[r.player]||{name:r.name,r:{},total:0,devs:new Set(),last:r.time,secs:0};if(b.r[r.round]===undefined){b.r[r.round]=r.score;b.total+=r.score;b.secs+=r.seconds}b.devs.add(r.device);if(r.time>b.last)b.last=r.time});
@@ -974,7 +1106,7 @@ function renderAdmin(d){
   $('chart').innerHTML=counts.map((c,i)=>`<div style="height:${Math.max(2,c/mx*100)}%" title="${c}"></div>`).join('');
   $('ax-l').textContent=new Date(end-buckets*size).toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
 
-  const label={pick_name:'picked their name',change_name:'switched player',start:'started',finish:'finished',blocked_replay:'tried to replay',left_midgame:'left mid-game'};
+  const label={pick_name:'picked their name',change_name:'switched player',start:'started',finish:'finished',blocked_replay:'tried to replay',left_midgame:'left mid-game',lang:'switched language to'};
   const feed=events.filter(e=>label[e.type]).slice(-40).reverse();
   $('feed').innerHTML=feed.length?feed.map(e=>`<li><span><b>${esc(e.name||'Someone')}</b> ${label[e.type]}${e.detail&&e.type!=='pick_name'?` · ${esc(e.detail)}`:''} <span class="pill">${esc(e.device)}</span></span><time>${ago(e.time)}</time></li>`).join(''):'<li class="hint">Nothing yet.</li>';
 
@@ -990,14 +1122,14 @@ document.addEventListener('keydown',e=>{
   if(e.target.tagName==='INPUT') return;
   const k=e.key.toLowerCase(),onBtn=!!e.target.closest('button');
   if(askState){
-    const q=askState.q;let idx=q.type==='yn'?'yn'.indexOf(k):'abcd'.indexOf(k);if(idx<0&&q.type!=='yn') idx='1234'.indexOf(k);
+    const q=askState.q;let idx=q.type==='yn'?'yn'.indexOf(k):'abcd'.indexOf(k);if(idx<0) idx=q.type==='yn'?'el'.indexOf(k):'1234'.indexOf(k);
     if(!askState.answered&&idx>-1&&idx<q.options.length&&k.length===1){e.preventDefault();answerCard(idx);return}
     if(askState.answered&&(k===' '||k==='enter')&&!onBtn){e.preventDefault();closeCard()}
     return;
   }
   if(current==='bowl'&&(k===' '||k==='enter')&&!onBtn){e.preventDefault();drawAction()}
   if(current==='road'&&(k===' '||k==='enter')&&!onBtn){e.preventDefault();roadGo()}
-  if(current==='stamp'&&S.phase==='q'){if(k==='y'){e.preventDefault();stampAnswer(0)}if(k==='n'){e.preventDefault();stampAnswer(1)}}
+  if(current==='stamp'&&S.phase==='q'){if(k==='y'||k==='e'){e.preventDefault();stampAnswer(0)}if(k==='n'||k==='l'){e.preventDefault();stampAnswer(1)}}
 });
 
 /* ===================== SOUND & CONFETTI ===================== */
@@ -1026,11 +1158,13 @@ function confettiFrame(){
   requestAnimationFrame(frame);
   flushOutbox();
   if(MODE==='admin'){
+    lang='en'; $('lang').hidden=true; applyLang();
     adminPw=ss.get('sdc-pw');
     if(adminPw&&await adminLoad()){view('admin');adminTimer=setInterval(adminLoad,20000)}else view('login');
     return;
   }
-  track('open',MODE);
+  applyLang();
+  track('open',`${MODE} · ${lang==='om'?'Afaan Oromoo':'English'}`);
   try{const r=await api.get({action:'config'});if(r&&r.ok) cfg.round=+r.round||0}catch(e){}
   const saved=MODE==='phone'?store.get('sdc-me',null):null;
   if(saved&&saved.id){me=saved;goHome()}else showPick();
